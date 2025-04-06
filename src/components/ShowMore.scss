@@ -1,0 +1,13 @@
+@import 'colors';
+
+.show-more-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $second-text-color;
+  border-radius: 5px;
+  height: 50px;
+  color: $components-background;
+  font-size: 12px;
+  border: none;
+}

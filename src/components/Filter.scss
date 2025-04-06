@@ -1,0 +1,57 @@
+@import 'colors';
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  height: 230px;
+  padding: 17px;
+  margin-top: 20px;
+  font-size: 13px;
+  list-style-type: none;
+  color: $main-text-color;
+  background-color: #ffffff;
+
+  .filter {
+    &:hover {
+      background-color: #f1fcff;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 10px;
+    }
+
+    input[type='checkbox'] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #9abbce;
+      background-color: white;
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+
+      &:checked {
+        border-color: #2196f3;
+
+        &::before {
+          position: absolute;
+          content: '✔';
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 16px;
+          color: #2196f3;
+        }
+      }
+    }
+  }
+}

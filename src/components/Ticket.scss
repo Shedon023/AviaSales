@@ -1,0 +1,51 @@
+@import 'colors';
+
+.ticket-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: $components-background;
+  border-radius: 5px;
+  margin: 0px 20px 20px 20px;
+
+  .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .airline-logo {
+    width: 107px;
+    height: 35px;
+  }
+
+  .price {
+    color: $second-text-color;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .flight-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 90px; // Равномерные отступы между блоками
+    padding: 0 10[];
+    font-size: 12px;
+    color: #a0b0b9;
+  }
+
+  .flight-info > div {
+    flex: 1; // Делаем все блоки равными по ширине
+    text-align: center; // Выравниваем текст
+  }
+
+  .date,
+  .duration,
+  .stops {
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

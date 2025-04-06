@@ -1,0 +1,41 @@
+@import 'colors';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+
+  .tab-and-ticket-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 20px;
+    width: 542px;
+  }
+
+  .theme-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+  }
+}
+
+#light.app-wrapper {
+  background-color: $main-background;
+}
+
+#dark.app-wrapper {
+  background-color: #46045e;
+}
