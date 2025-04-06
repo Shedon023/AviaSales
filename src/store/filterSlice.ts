@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Filters = {
   Все: boolean;
-  'Без пересадок': boolean;
-  '1 пересадка': boolean;
-  '2 пересадки': boolean;
-  '3 пересадки': boolean;
+  'No stops': boolean;
+  '1 stop': boolean;
+  '2 stops': boolean;
+  '3 stops': boolean;
 };
 
 type FilterState = {
@@ -14,11 +14,11 @@ type FilterState = {
 
 const initialState: FilterState = {
   filters: {
-    Все: true,
-    'Без пересадок': true,
-    '1 пересадка': true,
-    '2 пересадки': true,
-    '3 пересадки': true,
+    Все: false,
+    'No stops': false,
+    '1 stop': false,
+    '2 stops': false,
+    '3 stops': false,
   },
 };
 

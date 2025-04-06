@@ -2,13 +2,13 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { tabCheapest, tabFastest, tabOptimal } from '../store/tabsSlice';
 import './Tabs.scss';
 
-type Tabype = 'cheapest' | 'fastest' | 'all';
+type TabType = 'cheapest' | 'fastest' | 'optimal';
 
 const Tabs = () => {
   const dispatch = useAppDispatch();
   const activeTab = useAppSelector((state) => state.tabs.activeTab);
 
-  const tabChange = (tab: Tabype) => {
+  const tabChange = (tab: TabType) => {
     switch (tab) {
       case 'cheapest':
         dispatch(tabCheapest());
@@ -16,7 +16,7 @@ const Tabs = () => {
       case 'fastest':
         dispatch(tabFastest());
         break;
-      case 'all':
+      case 'optimal':
         dispatch(tabOptimal());
         break;
       default:
@@ -40,7 +40,7 @@ const Tabs = () => {
       </button>
       <button
         className={`all tab ${activeTab === 'optimal' ? 'active' : ''}`}
-        onClick={() => tabChange('all')}
+        onClick={() => tabChange('optimal')}
       >
         ОПТИМАЛЬНЫЙ
       </button>

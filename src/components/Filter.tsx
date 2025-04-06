@@ -36,8 +36,8 @@ const Filter = () => {
               type="checkbox"
               name="filter"
               value="Без пересадок"
-              checked={filters['Без пересадок']}
-              onChange={() => handleToggleFilter('Без пересадок')}
+              checked={filters['No stops']}
+              onChange={() => handleToggleFilter('No stops')}
             />
             Без пересадок
           </label>
@@ -48,8 +48,8 @@ const Filter = () => {
               type="checkbox"
               name="filter"
               value="1 пересадка"
-              checked={filters['1 пересадка']}
-              onChange={() => handleToggleFilter('1 пересадка')}
+              checked={filters['1 stop']}
+              onChange={() => handleToggleFilter('1 stop')}
             />
             1 пересадка
           </label>
@@ -60,8 +60,8 @@ const Filter = () => {
               type="checkbox"
               name="filter"
               value="2 пересадки"
-              checked={filters['2 пересадки']}
-              onChange={() => handleToggleFilter('2 пересадки')}
+              checked={filters['2 stops']}
+              onChange={() => handleToggleFilter('2 stops')}
             />
             2 пересадки
           </label>
@@ -72,8 +72,8 @@ const Filter = () => {
               type="checkbox"
               name="filter"
               value="3 пересадки"
-              checked={filters['3 пересадки']}
-              onChange={() => handleToggleFilter('3 пересадки')}
+              checked={filters['3 stops']}
+              onChange={() => handleToggleFilter('3 stops')}
             />
             3 пересадки
           </label>

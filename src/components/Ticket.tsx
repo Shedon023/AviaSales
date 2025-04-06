@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchData } from '../store/dataSlice';
 import { useEffect } from 'react';
 import { Ticket as TicketType } from '../store/dataSlice';
+
 const formatTime = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
@@ -57,23 +58,17 @@ const Ticket = () => {
   }
 
   let filteredItems = items;
-
-  if (
-    !filters['Все'] &&
-    (filters['Без пересадок'] ||
-      filters['1 пересадка'] ||
-      filters['2 пересадки'] ||
-      filters['3 пересадки'])
-  ) {
+  console.log(filters);
+  if (!filters['Все']) {
     filteredItems = items.filter((ticket) => {
       const stopsCount =
         ticket.segments[0].stops.length + ticket.segments[1].stops.length;
 
       return (
-        (filters['Без пересадок'] && stopsCount === 0) ||
-        (filters['1 пересадка'] && stopsCount === 1) ||
-        (filters['2 пересадки'] && stopsCount === 2) ||
-        (filters['3 пересадки'] && stopsCount === 3)
+        (filters['No stops'] && stopsCount === 0) ||
+        (filters['1 stop'] && stopsCount === 1) ||
+        (filters['2 stops'] && stopsCount === 2) ||
+        (filters['3 stops'] && stopsCount === 3)
       );
     });
   }
