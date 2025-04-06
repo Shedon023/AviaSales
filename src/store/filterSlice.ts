@@ -14,11 +14,11 @@ type FilterState = {
 
 const initialState: FilterState = {
   filters: {
-    Все: false,
-    'No stops': false,
-    '1 stop': false,
-    '2 stops': false,
-    '3 stops': false,
+    Все: true,
+    'No stops': true,
+    '1 stop': true,
+    '2 stops': true,
+    '3 stops': true,
   },
 };
 

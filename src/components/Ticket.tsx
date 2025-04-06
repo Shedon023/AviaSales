@@ -58,7 +58,7 @@ const Ticket = () => {
   }
 
   let filteredItems = items;
-  console.log(filters);
+
   if (!filters['Все']) {
     filteredItems = items.filter((ticket) => {
       const stopsCount =
@@ -73,12 +73,25 @@ const Ticket = () => {
     });
   }
 
-  if (activeTab === 'cheapest') {
-    filteredItems = [...items].sort((a, b) => a.price - b.price);
+  const allFiltersDisabled =
+    !filters['Все'] &&
+    !filters['No stops'] &&
+    !filters['1 stop'] &&
+    !filters['2 stops'] &&
+    !filters['3 stops'];
+
+  if (allFiltersDisabled) {
+    return (
+      <div className="no-tickets-message">
+        Билетов не найдено. Пожалуйста, выберите хотя бы один фильтр.
+      </div>
+    );
   }
 
-  if (activeTab === 'fastest') {
-    filteredItems = [...items].sort((a, b) => {
+  if (activeTab === 'cheapest') {
+    filteredItems = [...filteredItems].sort((a, b) => a.price - b.price);
+  } else if (activeTab === 'fastest') {
+    filteredItems = [...filteredItems].sort((a, b) => {
       const aDuration = a.segments.reduce(
         (sum: number, segment) => sum + segment.duration,
         0,
@@ -89,10 +102,8 @@ const Ticket = () => {
       );
       return aDuration - bDuration;
     });
-  }
-
-  if (activeTab === 'optimal') {
-    filteredItems = [...items].sort((a, b) => {
+  } else if (activeTab === 'optimal') {
+    filteredItems = [...filteredItems].sort((a, b) => {
       const optimalA = calculateSimpleOptimal(a);
       const optimalB = calculateSimpleOptimal(b);
       return optimalA - optimalB;
