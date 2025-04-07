@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { tabCheapest, tabFastest, tabOptimal } from '../store/tabsSlice';
-import './Tabs.scss';
+import styles from './Tabs.module.scss';
 
 type TabType = 'cheapest' | 'fastest' | 'optimal';
 
@@ -25,21 +25,21 @@ const Tabs = () => {
   };
 
   return (
-    <div className="tabs-container">
+    <div className={styles['tabs-container']}>
       <button
-        className={`cheapest tab ${activeTab === 'cheapest' ? 'active' : ''}`}
+        className={`${styles.cheapest} ${styles.tab} ${activeTab === 'cheapest' ? styles.active : ''}`}
         onClick={() => tabChange('cheapest')}
       >
         САМЫЙ ДЕШЕВЫЙ
       </button>
       <button
-        className={`fastest tab ${activeTab === 'fastest' ? 'active' : ''}`}
+        className={`${styles.fastest} ${styles.tab} ${activeTab === 'fastest' ? styles.active : ''}`}
         onClick={() => tabChange('fastest')}
       >
         САМЫЙ БЫСТРЫЙ
       </button>
       <button
-        className={`optimal tab ${activeTab === 'optimal' ? 'active' : ''}`}
+        className={`${styles.optimal} ${styles.tab} ${activeTab === 'optimal' ? styles.active : ''}`}
         onClick={() => tabChange('optimal')}
       >
         ОПТИМАЛЬНЫЙ

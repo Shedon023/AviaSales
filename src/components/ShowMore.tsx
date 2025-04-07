@@ -1,4 +1,4 @@
-import './ShowMore.scss';
+import styles from './ShowMore.module.scss';
 
 import { increaseVisibleTickets } from '../store/dataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -9,7 +9,7 @@ const ShowMore = () => {
   return (
     !loading && (
       <button
-        className="show-more-button"
+        className={styles['show-more-button']}
         onClick={() => dispatch(increaseVisibleTickets())}
       >
         ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!

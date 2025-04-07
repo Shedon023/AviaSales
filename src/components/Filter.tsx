@@ -1,4 +1,4 @@
-import './Filter.scss';
+import styles from './Filter.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { toggleFilter, toggleAllFilters } from '../store/filterSlice';
 
@@ -15,10 +15,10 @@ const Filter = () => {
   };
 
   return (
-    <div className="filters-container">
-      <ul className="filters">
+    <div className={styles['filters-container']}>
+      <ul className={styles['filters']}>
         КОЛИЧЕСТВО ПЕРЕСАДОК
-        <li className="filter">
+        <li className={styles['filter']}>
           <label>
             <input
               type="checkbox"
@@ -30,7 +30,7 @@ const Filter = () => {
             Все
           </label>
         </li>
-        <li className="filter">
+        <li className={styles['filter']}>
           <label>
             <input
               type="checkbox"
@@ -42,7 +42,7 @@ const Filter = () => {
             Без пересадок
           </label>
         </li>
-        <li className="filter">
+        <li className={styles['filter']}>
           <label>
             <input
               type="checkbox"
@@ -54,7 +54,7 @@ const Filter = () => {
             1 пересадка
           </label>
         </li>
-        <li className="filter">
+        <li className={styles['filter']}>
           <label>
             <input
               type="checkbox"
@@ -66,7 +66,7 @@ const Filter = () => {
             2 пересадки
           </label>
         </li>
-        <li className="filter">
+        <li className={styles['filter']}>
           <label>
             <input
               type="checkbox"
