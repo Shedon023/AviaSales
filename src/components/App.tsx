@@ -3,7 +3,7 @@ import Tabs from './Tabs';
 import Ticket from './Ticket';
 import ShowMore from './ShowMore';
 import './App.scss';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Switch from 'react-switch';
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -13,8 +13,15 @@ type ThemeContextType = {
   toggleTheme: () => void;
 };
 
+const savedTheme =
+  (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>(savedTheme);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === 'light' ? 'dark' : 'light'));

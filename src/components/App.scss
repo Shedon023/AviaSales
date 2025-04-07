@@ -1,4 +1,4 @@
-@import 'colors';
+@use 'colors' as colors;
 
 html,
 body {
@@ -33,9 +33,9 @@ body {
 }
 
 #light.app-wrapper {
-  background-color: $main-background;
+  background-color: colors.$main-background;
 }
 
 #dark.app-wrapper {
-  background-color: #46045e;
+  background-color: colors.$main-text-color;
 }

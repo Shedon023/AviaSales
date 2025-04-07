@@ -1,11 +1,11 @@
-@import 'colors';
+@use 'colors' as colors;
 
 .ticket-container {
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  background-color: $components-background;
+  background-color: var(--components-background);
   border-radius: 5px;
   margin: 0px 20px 20px 20px;
 
@@ -21,7 +21,7 @@
   }
 
   .price {
-    color: $second-text-color;
+    color: colors.$second-text-color;
     font-size: 24px;
     font-weight: 600;
   }
@@ -30,21 +30,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 90px; // Равномерные отступы между блоками
+    gap: 90px;
     padding: 0 10[];
     font-size: 12px;
-    color: #a0b0b9;
+    color: var(--main-text-color);
   }
 
   .flight-info > div {
-    flex: 1; // Делаем все блоки равными по ширине
-    text-align: center; // Выравниваем текст
+    flex: 1;
+    text-align: center;
   }
 
   .date,
   .duration,
   .stops {
-    color: #4a4a4a;
+    color: var(--main-text-color);
     font-size: 14px;
     font-weight: 500;
   }

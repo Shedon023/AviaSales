@@ -1,21 +1,20 @@
-@import 'colors';
+@use 'colors' as colors;
 
 .tabs-container {
   display: flex;
-  color: $main-text-color;
   font-size: 12px;
   border-radius: 5px;
   margin: 20px;
   justify-content: center;
 
   .tab {
-    background-color: $components-background;
+    background-color: var(--components-background);
+    color: var(--main-text-color) !important;
     border: 1px solid #dfe5ec;
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 168px;
     font-family: 'Open Sans', sans-serif;
-    color: $main-text-color;
     cursor: pointer;
   }
 
@@ -24,13 +23,14 @@
     border-bottom-left-radius: 5px;
   }
 
-  .all {
+  .optimal {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
 
   .active {
-    background-color: $second-text-color;
-    color: $components-background;
+    background-color: colors.$second-text-color;
+    color: colors.$main-background;
+    font-weight: bold;
   }
 }

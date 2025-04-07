@@ -2,3 +2,17 @@ $main-background: #f1fcff;
 $components-background: #ffffff;
 $main-text-color: #4a4a4a;
 $second-text-color: #2196f3;
+
+:root {
+  --main-background: #{$main-background};
+  --components-background: #{$components-background};
+  --main-text-color: #{$main-text-color};
+  --second-text-color: #{$second-text-color};
+}
+
+#dark {
+  --main-background: #1e1e1e;
+  --components-background: #2c2c2c;
+  --main-text-color: #ffffff;
+  --second-text-color: #64b5f6;
+}

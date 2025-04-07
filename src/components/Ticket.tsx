@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchData } from '../store/dataSlice';
 import { useEffect } from 'react';
 import { Ticket as TicketType } from '../store/dataSlice';
+import Loader from './Loader';
 
 const formatTime = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
@@ -47,15 +48,15 @@ const Ticket = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <div>Загрузка...</div>;
+    return <Loader />;
   }
   if (error) {
     return <div>Ошибка загрузки данных: {error}</div>;
   }
 
-  if (!items || items.length === 0) {
-    return <div>Нет доступных билетов.</div>;
-  }
+  // if (!items || items.length === 0) {
+  //   return <div>Нет доступных билетов.</div>;
+  // }
 
   let filteredItems = items;
 

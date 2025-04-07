@@ -39,7 +39,7 @@ const Tabs = () => {
         САМЫЙ БЫСТРЫЙ
       </button>
       <button
-        className={`all tab ${activeTab === 'optimal' ? 'active' : ''}`}
+        className={`optimal tab ${activeTab === 'optimal' ? 'active' : ''}`}
         onClick={() => tabChange('optimal')}
       >
         ОПТИМАЛЬНЫЙ
