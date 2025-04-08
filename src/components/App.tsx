@@ -5,6 +5,8 @@ import ShowMore from './ShowMore';
 import styles from './App.module.scss';
 import { createContext, useEffect, useState } from 'react';
 import Switch from 'react-switch';
+import Loader from './Loader';
+import { useAppSelector } from '../store/hook';
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
@@ -27,6 +29,7 @@ function App() {
   const toggleTheme = () => {
     setTheme((curr) => (curr === 'light' ? 'dark' : 'light'));
   };
+  const { loading, isComplete } = useAppSelector((state) => state.data);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -46,6 +49,8 @@ function App() {
         <Filter />
         <div className={styles['tab-and-ticket-wrapper']}>
           <Tabs />
+          {loading && !isComplete && <Loader />}
+
           <Ticket />
           <ShowMore />
         </div>

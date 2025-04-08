@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 
 const ShowMore = () => {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.data);
+  const { error, items } = useAppSelector((state) => state.data);
   const filters = useAppSelector((state) => state.filter.filters);
 
   const allFiltersDisabled =
@@ -15,8 +15,8 @@ const ShowMore = () => {
     filters['2 stops'] &&
     filters['3 stops'];
   return (
-    !loading &&
     allFiltersDisabled &&
+    items.length > 1 &&
     !error && (
       <button
         className={styles['show-more-button']}

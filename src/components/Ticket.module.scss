@@ -9,57 +9,57 @@
   border-radius: 5px;
   margin: 0px 20px 20px 20px;
   width: 470px;
-}
 
-.ticketHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
+  .ticketHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
 
-.airlineLogo {
-  width: 107px;
-  height: 35px;
-}
+  .airlineLogo {
+    width: 107px;
+    height: 35px;
+  }
 
-.price {
-  color: colors.$second-text-color;
-  font-size: 24px;
-  font-weight: 600;
-}
+  .price {
+    color: colors.$second-text-color;
+    font-size: 24px;
+    font-weight: 600;
+  }
 
-.flightInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 50px;
-  padding: 0 5px;
-  font-size: 12px;
-  color: var(--main-text-color);
-}
+  .flightInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    padding: 0 5px;
+    font-size: 12px;
+    color: var(--main-text-color);
+  }
 
-.flightInfo > div {
-  flex: 1;
-  text-align: center;
-}
+  .flightInfo > div {
+    flex: 1;
+    text-align: center;
+  }
 
-.date,
-.duration,
-.stops {
-  color: var(--main-text-color);
-  font-size: 13px;
-  font-weight: 500;
-  margin: 5px 0;
-}
+  .date,
+  .duration,
+  .stops {
+    color: var(--main-text-color);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 5px 0;
+  }
 
-.noTicketsMessage {
-  text-align: center;
-  padding: 10px;
-  font-size: 14px;
-  color: var(--main-text-color);
-}
+  .noTicketsMessage {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: var(--main-text-color);
+  }
 
-.return {
-  margin-top: 15px;
+  .return {
+    margin-top: 15px;
+  }
 }

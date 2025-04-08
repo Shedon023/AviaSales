@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchData } from '../store/dataSlice';
 import { useEffect } from 'react';
 import { Ticket as TicketType } from '../store/dataSlice';
-import Loader from './Loader';
 
 const formatTime = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
@@ -37,7 +36,7 @@ const calculateSimpleOptimal = (ticket: TicketType) => {
 const Ticket = () => {
   const dispatch = useAppDispatch();
 
-  const { items, loading, error, visibleTicketsCount } = useAppSelector(
+  const { items, error, visibleTicketsCount } = useAppSelector(
     (state) => state.data,
   );
   const activeTab = useAppSelector((state) => state.tabs.activeTab);
@@ -47,11 +46,13 @@ const Ticket = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  if (loading && !items.length) {
-    return <Loader />;
-  }
-  if (error) {
-    return <div>Ошибка загрузки данных: {error}</div>;
+  // if (loading && !items.length) {
+  //   return <Loader />;
+  // }
+  if (error && !items.length) {
+    return (
+      <div className={styles.errorMessage}>Ошибка загрузки данных: {error}</div>
+    );
   }
 
   let filteredItems = items;
@@ -108,15 +109,18 @@ const Ticket = () => {
   }
 
   return (
-    <div>
+    <div className={styles.ticketsList}>
       {filteredItems.slice(0, visibleTicketsCount).map((ticket, index) => {
         const firstSegment = ticket.segments[0];
         const secondSegment = ticket.segments[1];
         const logoUrl = `https://pics.avs.io/99/36/${ticket.carrier}.png`;
+
         return (
           <div key={index} className={styles.ticketContainer}>
             <div className={styles.ticketHeader}>
-              <div className={styles.price}>{ticket.price} Р </div>
+              <div className={styles.price}>
+                {ticket.price.toLocaleString()} Р
+              </div>
               <img
                 src={logoUrl}
                 alt="Логотип авиакомпании"
@@ -125,47 +129,54 @@ const Ticket = () => {
             </div>
 
             <div className={styles.flightInfo}>
-              <div>
-                <p>
-                  {firstSegment.origin} - {firstSegment.destination}
-                </p>
-
-                <p className={styles.date}>
-                  {formatDate(firstSegment.date)} -{' '}
+              <div className={styles.infoBlock}>
+                <div className={styles.route}>
+                  {firstSegment.origin} – {firstSegment.destination}
+                </div>
+                <div className={styles.time}>
+                  {formatDate(firstSegment.date)} –{' '}
                   {formatDate(secondSegment.date)}
-                </p>
+                </div>
               </div>
-              <div>
-                <p>{'В ПУТИ'}</p>
-                <p className={styles.duration}>
+              <div className={styles.infoBlock}>
+                <div className={styles.label}>В ПУТИ</div>
+                <div className={styles.duration}>
                   {formatTime(firstSegment.duration)}
-                </p>
+                </div>
               </div>
-              <div>
-                <p>{formatStops(firstSegment.stops)}</p>
-                <p className={styles.stops}>{firstSegment.stops.join(', ')}</p>
+              <div className={styles.infoBlock}>
+                <div className={styles.label}>
+                  {formatStops(firstSegment.stops)}
+                </div>
+                <div className={styles.stops}>
+                  {firstSegment.stops.join(', ')}
+                </div>
               </div>
             </div>
-            <div className={`${styles.flightInfo} ${styles.return}`}>
-              <div>
-                <p>
-                  {secondSegment.origin} - {secondSegment.destination}
-                </p>
 
-                <p className={styles.date}>
-                  {formatDate(secondSegment.date)} -{' '}
+            <div className={styles.flightInfo}>
+              <div className={styles.infoBlock}>
+                <div className={styles.route}>
+                  {secondSegment.origin} – {secondSegment.destination}
+                </div>
+                <div className={styles.time}>
+                  {formatDate(secondSegment.date)} –{' '}
                   {formatDate(firstSegment.date)}
-                </p>
+                </div>
               </div>
-              <div>
-                <p>{'В ПУТИ'}</p>
-                <p className={styles.duration}>
+              <div className={styles.infoBlock}>
+                <div className={styles.label}>В ПУТИ</div>
+                <div className={styles.duration}>
                   {formatTime(secondSegment.duration)}
-                </p>
+                </div>
               </div>
-              <div>
-                <p>{formatStops(secondSegment.stops)}</p>
-                <p className={styles.stops}>{secondSegment.stops.join(', ')}</p>
+              <div className={styles.infoBlock}>
+                <div className={styles.label}>
+                  {formatStops(secondSegment.stops)}
+                </div>
+                <div className={styles.stops}>
+                  {secondSegment.stops.join(', ')}
+                </div>
               </div>
             </div>
           </div>
