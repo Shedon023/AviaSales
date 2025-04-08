@@ -1,10 +1,10 @@
-import './Loader.scss';
+import styles from './Loader.module.scss';
 
 const Loader = () => {
   return (
-    <div className="loader-container">
-      <div className="progress-bar">
-        <div className="progress"></div>
+    <div className={styles['loader-container']}>
+      <div className={styles['progress-bar']}>
+        <div className={styles['progress']}></div>
       </div>
     </div>
   );

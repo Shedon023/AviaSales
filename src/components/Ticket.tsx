@@ -1,4 +1,4 @@
-import './Ticket.scss';
+import styles from './Ticket.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchData } from '../store/dataSlice';
 import { useEffect } from 'react';
@@ -54,10 +54,6 @@ const Ticket = () => {
     return <div>Ошибка загрузки данных: {error}</div>;
   }
 
-  // if (!items || items.length === 0) {
-  //   return <div>Нет доступных билетов.</div>;
-  // }
-
   let filteredItems = items;
 
   if (!filters['Все']) {
@@ -83,7 +79,7 @@ const Ticket = () => {
 
   if (allFiltersDisabled) {
     return (
-      <div className="no-tickets-message">
+      <div className={styles.noTicketsMessage}>
         Билетов не найдено. Пожалуйста, выберите хотя бы один фильтр.
       </div>
     );
@@ -118,54 +114,58 @@ const Ticket = () => {
         const secondSegment = ticket.segments[1];
         const logoUrl = `https://pics.avs.io/99/36/${ticket.carrier}.png`;
         return (
-          <div key={index} className="ticket-container">
-            <div className="ticket-header">
-              <div className="price">{ticket.price} Р </div>
+          <div key={index} className={styles.ticketContainer}>
+            <div className={styles.ticketHeader}>
+              <div className={styles.price}>{ticket.price} Р </div>
               <img
                 src={logoUrl}
                 alt="Логотип авиакомпании"
-                className="airline-logo"
+                className={styles.airlineLogo}
               />
             </div>
 
-            <div className="flight-info">
+            <div className={styles.flightInfo}>
               <div>
                 <p>
                   {firstSegment.origin} - {firstSegment.destination}
                 </p>
 
-                <p className="date">
+                <p className={styles.date}>
                   {formatDate(firstSegment.date)} -{' '}
                   {formatDate(secondSegment.date)}
                 </p>
               </div>
               <div>
                 <p>{'В ПУТИ'}</p>
-                <p className="duration">{formatTime(firstSegment.duration)}</p>
+                <p className={styles.duration}>
+                  {formatTime(firstSegment.duration)}
+                </p>
               </div>
               <div>
                 <p>{formatStops(firstSegment.stops)}</p>
-                <p className="stops">{firstSegment.stops.join(', ')}</p>
+                <p className={styles.stops}>{firstSegment.stops.join(', ')}</p>
               </div>
             </div>
-            <div className="flight-info return ">
+            <div className={`${styles.flightInfo} ${styles.return}`}>
               <div>
                 <p>
                   {secondSegment.origin} - {secondSegment.destination}
                 </p>
 
-                <p className="date">
+                <p className={styles.date}>
                   {formatDate(secondSegment.date)} -{' '}
                   {formatDate(firstSegment.date)}
                 </p>
               </div>
               <div>
                 <p>{'В ПУТИ'}</p>
-                <p className="duration">{formatTime(secondSegment.duration)}</p>
+                <p className={styles.duration}>
+                  {formatTime(secondSegment.duration)}
+                </p>
               </div>
               <div>
                 <p>{formatStops(secondSegment.stops)}</p>
-                <p className="stops">{secondSegment.stops.join(', ')}</p>
+                <p className={styles.stops}>{secondSegment.stops.join(', ')}</p>
               </div>
             </div>
           </div>

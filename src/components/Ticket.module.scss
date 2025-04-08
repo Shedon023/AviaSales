@@ -1,0 +1,61 @@
+@use 'colors' as colors;
+
+.ticketContainer {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: var(--components-background);
+  border-radius: 5px;
+  margin: 0px 20px 20px 20px;
+}
+
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.airlineLogo {
+  width: 107px;
+  height: 35px;
+}
+
+.price {
+  color: colors.$second-text-color;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.flightInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 90px;
+  padding: 0 10px;
+  font-size: 12px;
+  color: var(--main-text-color);
+}
+
+.flightInfo > div {
+  flex: 1;
+  text-align: center;
+}
+
+.date,
+.duration,
+.stops {
+  color: var(--main-text-color);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.noTicketsMessage {
+  text-align: center;
+  padding: 20px;
+  color: var(--main-text-color);
+}
+
+.return {
+  margin-top: 20px;
+}
