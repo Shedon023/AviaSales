@@ -30,23 +30,55 @@ export const fetchId = async (): Promise<string | undefined> => {
     console.error('Ошибка при получении данных:', error);
   }
 };
+export const fetchData = createAsyncThunk<void, void, { rejectValue: string }>(
+  'data/fetchData',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const searchId = await fetchId();
+      let stop = false;
 
-export const fetchData = createAsyncThunk<
-  { tickets: Ticket[] },
-  void,
-  { rejectValue: string }
->('data/fetchData', async (_, { rejectWithValue }) => {
-  const searchId = await fetchId();
-  const res = await fetch(
-    `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
-  );
-  if (!res.ok) {
-    return rejectWithValue('Ошибка загрузки данных');
-  }
-  const data = await res.json();
-  console.log(data.tickets);
-  return { tickets: data.tickets };
-});
+      const initialResponse = await fetch(
+        `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
+      );
+
+      if (!initialResponse.ok) {
+        return rejectWithValue('Ошибка загрузки данных');
+      }
+
+      const initialData = await initialResponse.json();
+      stop = initialData.stop;
+
+      if (initialData.tickets?.length) {
+        dispatch(dataSlice.actions.setTickets(initialData.tickets));
+      }
+
+      while (!stop) {
+        const response = await fetch(
+          `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
+        );
+
+        if (!response.ok) {
+          if (response.status === 500) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            continue;
+          }
+          return rejectWithValue('Ошибка загрузки данных');
+        }
+
+        const data = await response.json();
+        stop = data.stop;
+
+        console.log(data.tickets);
+
+        if (data.tickets?.length) {
+          dispatch(dataSlice.actions.addTickets(data.tickets));
+        }
+      }
+    } catch (error) {
+      return rejectWithValue('Ошибка соединения');
+    }
+  },
+);
 
 const dataSlice = createSlice({
   name: 'data',
@@ -55,10 +87,21 @@ const dataSlice = createSlice({
     visibleTicketsCount: 5,
     loading: false,
     error: null,
-  } as DataState,
+    isComplete: false,
+  } as DataState & { isComplete: boolean },
   reducers: {
     increaseVisibleTickets: (state) => {
       state.visibleTicketsCount += 5;
+    },
+    setTickets: (state, action) => {
+      state.items = action.payload;
+      state.loading = false;
+    },
+    addTickets: (state, action) => {
+      state.items = [...state.items, ...action.payload];
+    },
+    completeLoading: (state) => {
+      state.isComplete = true;
     },
   },
   extraReducers: (builder) => {
@@ -67,9 +110,8 @@ const dataSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.loading = false;
-        state.items = action.payload.tickets;
+      .addCase(fetchData.fulfilled, (state) => {
+        state.isComplete = true;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
