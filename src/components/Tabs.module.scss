@@ -6,6 +6,7 @@
   border-radius: 5px;
   margin: 20px;
   justify-content: center;
+  width: 500px;
 
   .tab {
     background-color: var(--components-background);
@@ -14,8 +15,12 @@
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 168px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
 
   .cheapest {
@@ -32,5 +37,12 @@
     background-color: colors.$second-text-color;
     color: colors.$main-background;
     font-weight: bold;
+  }
+
+  .radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
 }

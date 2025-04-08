@@ -25,25 +25,46 @@ const Tabs = () => {
   };
 
   return (
-    <div className={styles['tabs-container']}>
-      <button
+    <div className={styles['tabs-container']} role="radiogroup">
+      <label
         className={`${styles.cheapest} ${styles.tab} ${activeTab === 'cheapest' ? styles.active : ''}`}
-        onClick={() => tabChange('cheapest')}
       >
+        <input
+          type="radio"
+          name="tabs"
+          value="cheapest"
+          checked={activeTab === 'cheapest'}
+          onChange={() => tabChange('cheapest')}
+          className={styles['radio-input']}
+        />
         САМЫЙ ДЕШЕВЫЙ
-      </button>
-      <button
+      </label>
+      <label
         className={`${styles.fastest} ${styles.tab} ${activeTab === 'fastest' ? styles.active : ''}`}
-        onClick={() => tabChange('fastest')}
       >
+        <input
+          type="radio"
+          name="tabs"
+          value="fastest"
+          checked={activeTab === 'fastest'}
+          onChange={() => tabChange('fastest')}
+          className={styles['radio-input']}
+        />
         САМЫЙ БЫСТРЫЙ
-      </button>
-      <button
+      </label>
+      <label
         className={`${styles.optimal} ${styles.tab} ${activeTab === 'optimal' ? styles.active : ''}`}
-        onClick={() => tabChange('optimal')}
       >
+        <input
+          type="radio"
+          name="tabs"
+          value="optimal"
+          checked={activeTab === 'optimal'}
+          onChange={() => tabChange('optimal')}
+          className={styles['radio-input']}
+        />
         ОПТИМАЛЬНЫЙ
-      </button>
+      </label>
     </div>
   );
 };

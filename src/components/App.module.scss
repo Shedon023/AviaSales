@@ -4,7 +4,7 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--main-background);
 
   .tab-and-ticket-wrapper {
@@ -12,7 +12,9 @@
     flex-direction: column;
     gap: 15px;
     padding-left: 20px;
-    width: 542px;
+    // width: 542px;
+
+    align-items: center;
   }
 
   .theme-switch {

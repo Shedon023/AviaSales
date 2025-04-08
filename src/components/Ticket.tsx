@@ -47,7 +47,7 @@ const Ticket = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  if (loading) {
+  if (loading && !items.length) {
     return <Loader />;
   }
   if (error) {

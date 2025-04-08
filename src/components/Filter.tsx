@@ -15,7 +15,7 @@ const Filter = () => {
   };
 
   return (
-    <div className={styles['filters-container']}>
+    <aside className={styles['filters-container']}>
       <ul className={styles['filters']}>
         КОЛИЧЕСТВО ПЕРЕСАДОК
         <li className={styles['filter']}>
@@ -79,7 +79,7 @@ const Filter = () => {
           </label>
         </li>
       </ul>
-    </div>
+    </aside>
   );
 };
 

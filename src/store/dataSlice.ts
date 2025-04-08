@@ -85,7 +85,7 @@ const dataSlice = createSlice({
   initialState: {
     items: [],
     visibleTicketsCount: 5,
-    loading: false,
+    loading: true,
     error: null,
     isComplete: false,
   } as DataState & { isComplete: boolean },
@@ -95,7 +95,6 @@ const dataSlice = createSlice({
     },
     setTickets: (state, action) => {
       state.items = action.payload;
-      state.loading = false;
     },
     addTickets: (state, action) => {
       state.items = [...state.items, ...action.payload];
@@ -111,6 +110,7 @@ const dataSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchData.fulfilled, (state) => {
+        state.loading = false;
         state.isComplete = true;
       })
       .addCase(fetchData.rejected, (state, action) => {
