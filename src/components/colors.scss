@@ -10,7 +10,7 @@ $second-text-color: #2196f3;
   --second-text-color: #{$second-text-color};
 }
 
-#dark {
+:root[data-theme='dark'] {
   --main-background: #1e1e1e;
   --components-background: #2c2c2c;
   --main-text-color: #ffffff;

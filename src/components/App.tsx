@@ -2,7 +2,7 @@ import Filter from './Filter';
 import Tabs from './Tabs';
 import Ticket from './Ticket';
 import ShowMore from './ShowMore';
-import './App.scss';
+import styles from './App.module.scss';
 import { createContext, useEffect, useState } from 'react';
 import Switch from 'react-switch';
 
@@ -21,15 +21,17 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === 'light' ? 'dark' : 'light'));
   };
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className="app-wrapper" id={theme}>
-        <div className="theme-switch">
+      <div className={`${styles['app-wrapper']}`}>
+        <div className={styles['theme-switch']}>
           <span>🌞</span>
           <Switch
             checked={theme === 'dark'}
@@ -42,7 +44,7 @@ function App() {
           <span>🌙</span>
         </div>
         <Filter />
-        <div className="tab-and-ticket-wrapper">
+        <div className={styles['tab-and-ticket-wrapper']}>
           <Tabs />
           <Ticket />
           <ShowMore />

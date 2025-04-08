@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   font-family: 'Open Sans', sans-serif;
+  background-color: var(--main-background);
 
   .tab-and-ticket-wrapper {
     display: flex;
@@ -23,12 +24,4 @@
     gap: 10px;
     z-index: 10;
   }
-}
-
-#light.app-wrapper {
-  background-color: colors.$main-background;
-}
-
-#dark.app-wrapper {
-  background-color: colors.$main-text-color;
 }
