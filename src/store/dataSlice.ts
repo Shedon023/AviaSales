@@ -68,8 +68,6 @@ export const fetchData = createAsyncThunk<void, void, { rejectValue: string }>(
         const data = await response.json();
         stop = data.stop;
 
-        console.log(data.tickets);
-
         if (data.tickets?.length) {
           dispatch(dataSlice.actions.addTickets(data.tickets));
         }
