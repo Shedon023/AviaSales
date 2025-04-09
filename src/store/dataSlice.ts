@@ -10,53 +10,63 @@ export const fetchId = async (): Promise<string | undefined> => {
     console.error('Ошибка при получении данных:', error);
   }
 };
-export const fetchData = createAsyncThunk<void, void, { rejectValue: string }>(
-  'data/fetchData',
-  async (_, { rejectWithValue, dispatch }) => {
-    try {
-      const searchId = await fetchId();
-      let stop = false;
 
-      const initialResponse = await fetch(
+export const fetchTicketsThunk = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: string }
+>('data/fetchTicketsThunk', async (_, { rejectWithValue, dispatch }) => {
+  try {
+    const searchId = await fetchId();
+    let stop = false;
+    let retries = 4;
+
+    const initialResponse = await fetch(
+      `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
+    );
+
+    if (!initialResponse.ok) {
+      return rejectWithValue('Ошибка загрузки данных');
+    }
+
+    const initialData = await initialResponse.json();
+    stop = initialData.stop;
+
+    if (initialData.tickets?.length) {
+      dispatch(dataSlice.actions.setTickets(initialData.tickets));
+    }
+
+    while (!stop && retries >= 0) {
+      const response = await fetch(
         `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
       );
 
-      if (!initialResponse.ok) {
+      if (!response.ok) {
+        if (response.status === 500) {
+          retries -= 1;
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          continue;
+        }
         return rejectWithValue('Ошибка загрузки данных');
       }
 
-      const initialData = await initialResponse.json();
-      stop = initialData.stop;
+      const data = await response.json();
+      stop = data.stop;
 
-      if (initialData.tickets?.length) {
-        dispatch(dataSlice.actions.setTickets(initialData.tickets));
+      if (data.tickets?.length) {
+        dispatch(dataSlice.actions.addTickets(data.tickets));
       }
 
-      while (!stop) {
-        const response = await fetch(
-          `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
-        );
-
-        if (!response.ok) {
-          if (response.status === 500) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-            continue;
-          }
-          return rejectWithValue('Ошибка загрузки данных');
-        }
-
-        const data = await response.json();
-        stop = data.stop;
-
-        if (data.tickets?.length) {
-          dispatch(dataSlice.actions.addTickets(data.tickets));
-        }
-      }
-    } catch (error) {
-      return rejectWithValue('Ошибка соединения');
+      retries = 4;
     }
-  },
-);
+
+    if (retries < 0) {
+      return rejectWithValue('Превышено кол-во попыток загрузки');
+    }
+  } catch (error) {
+    return rejectWithValue('Ошибка соединения');
+  }
+});
 
 const dataSlice = createSlice({
   name: 'data',
@@ -83,15 +93,15 @@ const dataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, (state) => {
+      .addCase(fetchTicketsThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchData.fulfilled, (state) => {
+      .addCase(fetchTicketsThunk.fulfilled, (state) => {
         state.loading = false;
         state.isComplete = true;
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(fetchTicketsThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

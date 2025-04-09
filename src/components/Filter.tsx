@@ -24,7 +24,7 @@ const Filter = () => {
               type="checkbox"
               name="filter"
               value="Все"
-              checked={filters.Все}
+              checked={filters.All}
               onChange={handleToggleAll}
             />
             Все

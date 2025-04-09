@@ -9,7 +9,7 @@ const ShowMore = () => {
   const filters = useAppSelector((state) => state.filter.filters);
 
   const allFiltersDisabled =
-    filters['Все'] &&
+    filters['All'] &&
     filters['No stops'] &&
     filters['1 stop'] &&
     filters['2 stops'] &&
@@ -19,7 +19,7 @@ const ShowMore = () => {
     items.length > 1 &&
     !error && (
       <button
-        className={styles['show-more-button']}
+        className={styles['showMoreButton']}
         onClick={() => dispatch(increaseVisibleTickets())}
       >
         ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!

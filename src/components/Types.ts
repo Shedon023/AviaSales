@@ -27,7 +27,7 @@ export type DataState = {
 };
 
 export type Filters = {
-  Все: boolean;
+  All: boolean;
   'No stops': boolean;
   '1 stop': boolean;
   '2 stops': boolean;
@@ -36,8 +36,4 @@ export type Filters = {
 
 export type FilterState = {
   filters: Filters;
-};
-
-type Tabs = {
-  activeTab: 'optimal' | 'cheapest' | 'fastest';
 };

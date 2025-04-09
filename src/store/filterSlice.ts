@@ -3,7 +3,7 @@ import { Filters, FilterState } from '../components/Types';
 
 const initialState: FilterState = {
   filters: {
-    Все: true,
+    All: true,
     'No stops': true,
     '1 stop': true,
     '2 stops': true,
@@ -20,27 +20,27 @@ const filterSlice = createSlice({
 
       state.filters[filterName] = !state.filters[filterName];
 
-      //  снимаем "Все"
-      if (filterName !== 'Все' && state.filters[filterName] === false) {
-        state.filters.Все = false;
+      //  снимаем "All"
+      if (filterName !== 'All' && state.filters[filterName] === false) {
+        state.filters.All = false;
       }
 
-      //  включаем "Все"
+      //  включаем "All"
       if (
         Object.keys(state.filters)
-          .filter((key) => key !== 'Все')
+          .filter((key) => key !== 'All')
           .every((key) => state.filters[key as keyof Filters])
       ) {
-        state.filters.Все = true;
+        state.filters.All = true;
       }
     },
 
     toggleAllFilters(state) {
-      const newState = !state.filters.Все;
-      state.filters.Все = newState;
-      // все фильтры "Все"
+      const newState = !state.filters.All;
+      state.filters.All = newState;
+      // All фильтры "All"
       Object.keys(state.filters).forEach((key) => {
-        if (key !== 'Все') {
+        if (key !== 'All') {
           state.filters[key as keyof Filters] = newState;
         }
       });

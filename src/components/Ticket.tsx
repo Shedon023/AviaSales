@@ -1,6 +1,6 @@
 import styles from './Ticket.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { fetchData } from '../store/dataSlice';
+import { fetchTicketsThunk } from '../store/dataSlice';
 import { useEffect } from 'react';
 import { Ticket as TicketType } from './Types';
 
@@ -43,7 +43,7 @@ const Ticket = () => {
   const filters = useAppSelector((state) => state.filter.filters);
 
   useEffect(() => {
-    dispatch(fetchData());
+    dispatch(fetchTicketsThunk());
   }, [dispatch]);
 
   if (error && !items.length) {
@@ -54,7 +54,7 @@ const Ticket = () => {
 
   let filteredItems = items;
 
-  if (!filters['Все']) {
+  if (!filters['All']) {
     filteredItems = items.filter((ticket) => {
       const stopsCount =
         ticket.segments[0].stops.length + ticket.segments[1].stops.length;
@@ -69,7 +69,7 @@ const Ticket = () => {
   }
 
   const allFiltersDisabled =
-    !filters['Все'] &&
+    !filters['All'] &&
     !filters['No stops'] &&
     !filters['1 stop'] &&
     !filters['2 stops'] &&
