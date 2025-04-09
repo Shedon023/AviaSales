@@ -1,16 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-type Filters = {
-  Все: boolean;
-  'No stops': boolean;
-  '1 stop': boolean;
-  '2 stops': boolean;
-  '3 stops': boolean;
-};
-
-type FilterState = {
-  filters: Filters;
-};
+import { Filters, FilterState } from '../components/Types';
 
 const initialState: FilterState = {
   filters: {

@@ -2,7 +2,7 @@ import styles from './Ticket.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchData } from '../store/dataSlice';
 import { useEffect } from 'react';
-import { Ticket as TicketType } from '../store/dataSlice';
+import { Ticket as TicketType } from './Types';
 
 const formatTime = (minutes: number) => {
   const hours = Math.floor(minutes / 60);
@@ -46,9 +46,6 @@ const Ticket = () => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  // if (loading && !items.length) {
-  //   return <Loader />;
-  // }
   if (error && !items.length) {
     return (
       <div className={styles.errorMessage}>Ошибка загрузки данных: {error}</div>

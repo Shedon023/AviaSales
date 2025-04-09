@@ -7,13 +7,9 @@ import { createContext, useEffect, useState } from 'react';
 import Switch from 'react-switch';
 import Loader from './Loader';
 import { useAppSelector } from '../store/hook';
+import { ThemeContextType } from './Types';
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
-
-type ThemeContextType = {
-  theme: 'light' | 'dark';
-  toggleTheme: () => void;
-};
 
 const savedTheme =
   (localStorage.getItem('theme') as 'light' | 'dark') || 'light';

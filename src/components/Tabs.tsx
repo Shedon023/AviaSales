@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { tabCheapest, tabFastest, tabOptimal } from '../store/tabsSlice';
 import styles from './Tabs.module.scss';
-
-type TabType = 'cheapest' | 'fastest' | 'optimal';
+import { TabType } from './Types';
 
 const Tabs = () => {
   const dispatch = useAppDispatch();

@@ -1,25 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-export type Segment = {
-  date: string;
-  destination: string;
-  duration: number;
-  origin: string;
-  stops: string[];
-};
-
-export type Ticket = {
-  carrier: string;
-  price: number;
-  segments: Segment[];
-};
-
-export type DataState = {
-  items: Ticket[];
-  visibleTicketsCount: number;
-  loading: boolean;
-  error: null | string | undefined;
-};
+import { DataState } from '../components/Types';
 
 export const fetchId = async (): Promise<string | undefined> => {
   try {
