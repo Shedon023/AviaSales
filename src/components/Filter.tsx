@@ -2,6 +2,14 @@ import styles from './Filter.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { toggleFilter, toggleAllFilters } from '../store/filterSlice';
 
+const filterOptions = [
+  { key: 'All', label: 'Все' },
+  { key: 'No stops', label: 'Без пересадок' },
+  { key: '1 stop', label: '1 пересадка' },
+  { key: '2 stops', label: '2 пересадки' },
+  { key: '3 stops', label: '3 пересадки' },
+] as const;
+
 const Filter = () => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.filter.filters);
@@ -18,66 +26,24 @@ const Filter = () => {
     <aside className={styles['filters-container']}>
       <ul className={styles['filters']}>
         КОЛИЧЕСТВО ПЕРЕСАДОК
-        <li className={styles['filter']}>
-          <label>
-            <input
-              type="checkbox"
-              name="filter"
-              value="Все"
-              checked={filters.All}
-              onChange={handleToggleAll}
-            />
-            Все
-          </label>
-        </li>
-        <li className={styles['filter']}>
-          <label>
-            <input
-              type="checkbox"
-              name="filter"
-              value="Без пересадок"
-              checked={filters['No stops']}
-              onChange={() => handleToggleFilter('No stops')}
-            />
-            Без пересадок
-          </label>
-        </li>
-        <li className={styles['filter']}>
-          <label>
-            <input
-              type="checkbox"
-              name="filter"
-              value="1 пересадка"
-              checked={filters['1 stop']}
-              onChange={() => handleToggleFilter('1 stop')}
-            />
-            1 пересадка
-          </label>
-        </li>
-        <li className={styles['filter']}>
-          <label>
-            <input
-              type="checkbox"
-              name="filter"
-              value="2 пересадки"
-              checked={filters['2 stops']}
-              onChange={() => handleToggleFilter('2 stops')}
-            />
-            2 пересадки
-          </label>
-        </li>
-        <li className={styles['filter']}>
-          <label>
-            <input
-              type="checkbox"
-              name="filter"
-              value="3 пересадки"
-              checked={filters['3 stops']}
-              onChange={() => handleToggleFilter('3 stops')}
-            />
-            3 пересадки
-          </label>
-        </li>
+        {filterOptions.map(({ key, label }) => (
+          <li key={key} className={styles['filter']}>
+            <label>
+              <input
+                type="checkbox"
+                name="filter"
+                value={label}
+                checked={filters[key]}
+                onChange={
+                  key === 'All'
+                    ? handleToggleAll
+                    : () => handleToggleFilter(key as keyof typeof filters)
+                }
+              />
+              {label}
+            </label>
+          </li>
+        ))}
       </ul>
     </aside>
   );

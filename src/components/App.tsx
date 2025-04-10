@@ -1,13 +1,13 @@
 import Filter from './Filter';
 import Tabs from './Tabs';
-import Ticket from './Ticket';
+import Ticket from './TicketList';
 import ShowMore from './ShowMore';
 import styles from './App.module.scss';
 import Switch from 'react-switch';
 import Loader from './Loader';
 import { useAppSelector } from '../store/hook';
 import { useContext } from 'react';
-import { ThemeContext } from './ThemeProvider';
+import { ThemeContext } from '../lib/ThemeProvider';
 
 function App() {
   const { loading, isComplete } = useAppSelector((state) => state.data);

@@ -1,24 +1,9 @@
-import styles from './Ticket.module.scss';
+import styles from './TicketList.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchTicketsThunk } from '../store/dataSlice';
 import { useEffect } from 'react';
-import { Ticket as TicketType } from './Types';
-
-const formatTime = (minutes: number) => {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  return `${hours}ч ${mins}м`;
-};
-
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-};
-
-const formatStops = (stops: string[]) => {
-  if (stops.length === 0) return 'БЕЗ ПЕРЕСАДОК';
-  return `${stops.length} ПЕРЕСАДК${stops.length === 1 ? 'А' : stops.length < 5 ? 'И' : 'ок'}`;
-};
+import { Ticket as TicketType } from '../lib/Types';
+import { formatTime, formatDate, formatStops } from '../lib/formatFuncs';
 
 const calculateSimpleOptimal = (ticket: TicketType) => {
   const totalDuration = ticket.segments.reduce(

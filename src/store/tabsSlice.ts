@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { TabType } from '../lib/Types';
 
 type Tabs = {
   activeTab: 'optimal' | 'cheapest' | 'fastest';
@@ -12,18 +14,11 @@ const tabsSlice = createSlice({
   name: 'tabs',
   initialState,
   reducers: {
-    tabCheapest: (state) => {
-      state.activeTab = 'cheapest';
-    },
-    tabFastest: (state) => {
-      state.activeTab = 'fastest';
-    },
-    tabOptimal: (state) => {
-      state.activeTab = 'optimal';
+    setTab: (state, action: PayloadAction<TabType>) => {
+      state.activeTab = action.payload;
     },
   },
 });
 
-export const { tabCheapest, tabFastest, tabOptimal } = tabsSlice.actions;
-
+export const { setTab } = tabsSlice.actions;
 export default tabsSlice.reducer;
