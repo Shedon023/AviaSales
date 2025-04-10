@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { TabType } from '../lib/Types';
+import { TabType } from '../types/Types';
 
 type Tabs = {
   activeTab: 'optimal' | 'cheapest' | 'fastest';

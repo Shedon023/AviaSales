@@ -1,19 +1,19 @@
 import Filter from './Filter';
 import Tabs from './Tabs';
-import Ticket from './TicketList';
-import ShowMore from './ShowMore';
+import TicketList from './TicketList';
+import ShowMoreButton from './ShowMore';
 import styles from './App.module.scss';
 import Switch from 'react-switch';
 import Loader from './Loader';
 import { useAppSelector } from '../store/hook';
 import { useContext } from 'react';
-import { ThemeContext } from '../lib/ThemeProvider';
+import { ThemeContext } from '../theme/ThemeProvider';
 
 function App() {
   const { loading, isComplete } = useAppSelector((state) => state.data);
   const themeContext = useContext(ThemeContext);
 
-  if (!themeContext) return null; // Safety check
+  if (!themeContext) return null;
   const { theme, toggleTheme } = themeContext;
 
   return (
@@ -32,8 +32,8 @@ function App() {
       <div className={styles['tab-and-ticket-wrapper']}>
         <Tabs />
         {loading && !isComplete && <Loader />}
-        <Ticket />
-        <ShowMore />
+        <TicketList />
+        <ShowMoreButton />
       </div>
     </div>
   );

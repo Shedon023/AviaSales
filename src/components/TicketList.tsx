@@ -2,7 +2,7 @@ import styles from './TicketList.module.scss';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { fetchTicketsThunk } from '../store/dataSlice';
 import { useEffect } from 'react';
-import { Ticket as TicketType } from '../lib/Types';
+import { Ticket as TicketType } from '../types/Types';
 import { formatTime, formatDate, formatStops } from '../lib/formatFuncs';
 
 const calculateSimpleOptimal = (ticket: TicketType) => {
@@ -18,7 +18,7 @@ const calculateSimpleOptimal = (ticket: TicketType) => {
   return ticket.price + totalDuration + penalty;
 };
 
-const Ticket = () => {
+const TicketList = () => {
   const dispatch = useAppDispatch();
 
   const { items, error, visibleTicketsCount } = useAppSelector(
@@ -60,13 +60,11 @@ const Ticket = () => {
     !filters['2 stops'] &&
     !filters['3 stops'];
 
-  if (allFiltersDisabled) {
-    return (
-      <div className={styles.noTicketsMessage}>
-        Билетов не найдено. Пожалуйста, выберите хотя бы один фильтр.
-      </div>
-    );
-  }
+  const noTicketsMessage = allFiltersDisabled ? (
+    <div className={styles.noTicketsMessage}>
+      Билетов не найдено. Пожалуйста, выберите хотя бы один фильтр.
+    </div>
+  ) : null;
 
   if (activeTab === 'cheapest') {
     filteredItems = [...filteredItems].sort((a, b) => a.price - b.price);
@@ -92,6 +90,7 @@ const Ticket = () => {
 
   return (
     <div className={styles.ticketsList}>
+      {noTicketsMessage}
       {filteredItems.slice(0, visibleTicketsCount).map((ticket, index) => {
         const firstSegment = ticket.segments[0];
         const secondSegment = ticket.segments[1];
@@ -168,4 +167,4 @@ const Ticket = () => {
   );
 };
 
-export default Ticket;
+export default TicketList;

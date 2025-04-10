@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { DataState } from '../lib/Types';
+import { DataState } from '../types/Types';
 
 export const fetchId = async (): Promise<string | undefined> => {
   try {

@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import styles from './Tabs.module.scss';
-import { TabType } from '../lib/Types';
+import { TabType } from '../types/Types';
 import { setTab } from '../store/tabsSlice';
 
 const Tabs = () => {

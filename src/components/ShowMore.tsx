@@ -3,7 +3,7 @@ import styles from './ShowMore.module.scss';
 import { increaseVisibleTickets } from '../store/dataSlice';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 
-const ShowMore = () => {
+const ShowMoreButton = () => {
   const dispatch = useAppDispatch();
   const { error, items } = useAppSelector((state) => state.data);
   const filters = useAppSelector((state) => state.filter.filters);
@@ -28,4 +28,4 @@ const ShowMore = () => {
   );
 };
 
-export default ShowMore;
+export default ShowMoreButton;
